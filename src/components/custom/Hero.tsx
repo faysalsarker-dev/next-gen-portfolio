@@ -4,9 +4,9 @@ import { Typewriter } from "react-simple-typewriter";
 
 export default function Hero() {
   return (
-    <section className="flex bg-[#0D0914]  items-center justify-center min-h-[calc(100vh-4rem)] px-4 text-center ">
+    <section className="flex bg-background  items-center justify-center min-h-[calc(100vh-4rem)] px-4 text-center ">
       <div className="max-w-2xl space-y-4">
-       
+     
  <h1  className="text-4xl md:text-5xl font-extrabold leading-tight text-white">
           Grow Your Business <br />
 with  
@@ -31,9 +31,9 @@ with
 
 
         <div>
-         
-        </div>
+        </div>  
       </div>
+      
     </section>
   );
 }
