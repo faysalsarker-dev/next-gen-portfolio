@@ -1,13 +1,11 @@
-import { Hero, Navbar } from "@/components/custom";
+import { Hero, Services } from "@/components/custom";
 
 export default function Home() {
   return (
  <div>
 
 <Hero/>
-<Hero/>
-<Hero/>
-<Hero/>
+<Services/>
  </div>
   );
 }
