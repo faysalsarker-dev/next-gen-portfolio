@@ -55,6 +55,8 @@
   }
 }
 
+
+
 /* global.css or tailwind layer */
 .globe-glow {
   filter: drop-shadow(0 0 25px #782EFA) drop-shadow(0 0 15px #F622C2);
@@ -185,6 +187,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --animate-aurora: aurora 8s ease-in-out infinite alternate;
+  
   @keyframes aurora {
   0% {
     background-position: 0% 50%;
@@ -260,4 +263,51 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* --- Connector Lines & Curves --- */
+.connector-line::before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  top: 100%;
+  left: 50%;
+  height: 120px;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.connector-curve-left::before {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-left: 2px dashed rgba(255, 255, 255, 0.2);
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: -1;
+}
+
+.connector-curve-right::before {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-right: 2px dashed rgba(255, 255, 255, 0.2);
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+  z-index: -1;
+}
+
 

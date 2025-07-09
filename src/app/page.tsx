@@ -1,4 +1,5 @@
 import { Hero, Services } from "@/components/custom";
+import  HowWeWork  from "@/components/custom/HowWeWork";
 
 export default function Home() {
   return (
@@ -6,6 +7,7 @@ export default function Home() {
 
 <Hero/>
 <Services/>
+<HowWeWork/>
  </div>
   );
 }
