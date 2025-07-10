@@ -55,14 +55,10 @@
   }
 }
 
-
-
 /* global.css or tailwind layer */
 .globe-glow {
   filter: drop-shadow(0 0 25px #782EFA) drop-shadow(0 0 15px #F622C2);
 }
-
-
 
 .glass {
   background: rgba(255, 255, 255, 0.061); 
@@ -187,7 +183,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --animate-aurora: aurora 8s ease-in-out infinite alternate;
-  
+
   @keyframes aurora {
   0% {
     background-position: 0% 50%;
@@ -218,6 +214,24 @@
     }
   30%, 60% {
     background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  @keyframes marquee {
+  from {
+    transform: translateX(0);
+    }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+    }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
     }
   }} 
 
@@ -264,7 +278,6 @@
   }
 }
 
-
 /* --- Connector Lines & Curves --- */
 .connector-line::before {
   content: "";
@@ -309,5 +322,3 @@
   transform: translateX(-50%) rotate(-45deg);
   z-index: -1;
 }
-
-
