@@ -37,7 +37,7 @@ export default function FAQ() {
       setActiveIndex((prev) => (prev + 1) % benefitItems.length);
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [benefitItems.length]);
 
   useGSAP(() => {
     benefitRefs.current.forEach((el, i) => {
