@@ -2,21 +2,13 @@
 
 import { useRef } from "react";
 import { Marquee } from "@/components/magicui/marquee";
-import { AvatarCircles } from "../magicui/avatar-circles";
 import TestimonialCard from "./TestimonialCard";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import AvatarShowcase from "./AvatarShowcase";
 
-const avatars = [
-  { imageUrl: "https://avatars.githubusercontent.com/u/16860528", profileUrl: "https://github.com/dillionverma" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/20110627", profileUrl: "https://github.com/tomonarifeehan" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/106103625", profileUrl: "https://github.com/BankkRoll" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/59228569", profileUrl: "https://github.com/safethecode" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/59442788", profileUrl: "https://github.com/sanjay-mali" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/89768406", profileUrl: "https://github.com/itsarghyadas" },
-];
+
 
 const reviews = [
   { name: "Jack Dawson", username: "@jackdawson", body: "The design and experience are simply next-level!", img: "https://avatar.vercel.sh/jack" },
@@ -119,7 +111,7 @@ const Testimonial = () => {
 
       {/* Avatar Circles */}
       <div className="mb-16">
-        <AvatarShowcase/>
+        {/* <AvatarShowcase/> */}
         {/* <AvatarCircles numPeople={99} avatarUrls={avatars} /> */}
       </div>
 

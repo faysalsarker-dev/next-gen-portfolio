@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
-import { motion, useAnimation } from "framer-motion"
+import { motion } from "framer-motion"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ChevronDown, Globe2 } from "lucide-react"
@@ -28,7 +28,6 @@ const navItems = [
 
 export default function Navbar() {
   const navRef = useRef(null)
-  const controls = useAnimation()
   const [visible, setVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const pathname = usePathname()
@@ -62,7 +61,7 @@ export default function Navbar() {
     <header
       ref={navRef}
       className={cn(
-        "fixed top-0 w-full z-50 transition-transform duration-500 backdrop-blur-lg border-b border-white/10",
+        "fixed top-0 w-full z-50 transition-transform duration-500 backdrop-blur-lg border-b border-white/10 border-0",
         visible ? "translate-y-0" : "-translate-y-full",
         "bg-background/50 bg-glass"
       )}

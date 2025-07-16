@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import gsap from "gsap";
 import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
 
 interface ProjectCardProps {

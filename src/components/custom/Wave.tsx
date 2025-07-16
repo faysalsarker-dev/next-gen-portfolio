@@ -36,7 +36,6 @@ export default function Wave() {
 
         for (let x = 0; x < width; x++) {
           const scale = 0.004;
-          const freq = 2;
           const centerY = height / 2;
           const amplitude = 40;
 
