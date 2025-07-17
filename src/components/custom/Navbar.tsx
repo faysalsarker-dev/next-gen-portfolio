@@ -17,14 +17,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { navItems } from "./NavItems"
 
-const navItems = [
-  { label: "Start", href: "/" },
-  { label: "DeFi Network", href: "/defi" },
-  { label: "Crypto Labs", href: "/labs" },
-  { label: "Marketplace", href: "/marketplace" },
-  { label: "Exchange", href: "/exchange" },
-]
+
 
 export default function Navbar() {
   const navRef = useRef(null)

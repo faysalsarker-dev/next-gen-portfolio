@@ -76,6 +76,7 @@ export default function Services() {
   return (
     <section className="relative z-10 px-4 py-24 bg-background text-white max-w-6xl mx-auto">
       <div className="max-w-6xl mx-auto text-center mb-16">
+        
         <h2 className="text-4xl font-bold">What I Can Build For You</h2>
         <p className="text-muted-foreground mt-2 max-w-xl mx-auto">
           Future-ready digital solutions — fast, reliable, and aligned with your goals

@@ -244,6 +244,7 @@ export default function HowWeWork() {
           </span>
         </div>
         <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+         
           The Future of <br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">
             Digital Creation
