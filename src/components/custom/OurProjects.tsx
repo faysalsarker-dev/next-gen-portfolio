@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Marquee } from "@/components/magicui/marquee";
@@ -32,55 +33,73 @@ const projects = [
 ];
 
 export default function OurProjects() {
-  const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".project-card", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
+  useGSAP(() => {
+    gsap.utils.toArray(".scroll-card").forEach((card, i) => {
+      gsap.fromTo(
+        card,
+        {
+          scale: 0.9,
+          opacity: 0,
         },
-        opacity: 0,
-        y: 60,
-        stagger: 0.2,
-        duration: 1,
-        ease: "expo.out",
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+        {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            end: "bottom 60%",
+            toggleActions: "play none none reverse",
+          },
+          scale: 1,
+          opacity: 1,
+          duration: 1,
+          ease: "power2.out",
+          delay: i * 0.1,
+        }
+      );
+    });
+  }, { scope: containerRef });
 
   return (
     <section
       ref={containerRef}
-      className="py-24 px-4 md:px-12 bg-gradient-to-b from-background/70 to-black text-white relative overflow-hidden"
+      className="relative py-32 px-4 md:px-12 bg-gradient-to-br from-[#0D0914] to-[#15101E] text-white overflow-hidden"
     >
-      <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-        Our Projects
-      </h2>
+      {/* Ambient Lighting Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-10 left-1/2 w-[700px] h-[700px] bg-purple-500/30 rounded-full blur-[200px] -translate-x-1/2 animate-pulse" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-2xl animate-pulse" />
+      </div>
 
-      <p className="text-center text-white/60 mb-10 max-w-3xl mx-auto">
-        Explore a few of our favorite works—each crafted with precision, innovation, and flair.
-      </p>
+      <div className="relative z-10">
+        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-10 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+          Our Projects
+        </h2>
 
-      {/* Marquee with project cards */}
-      <Marquee pauseOnHover className="[--duration:30s] mb-12">
-        {projects.map((p, i) => (
-          <div key={i} className="project-card inline-block px-2">
-            <ProjectCard {...p} />
-          </div>
-        ))}
-      </Marquee>
+        <p className="text-center text-white/70 mb-16 max-w-2xl mx-auto">
+          Explore our favorite creations—built to impress, engineered to perform.
+        </p>
 
-      {/* Grid fallback for non-scrolling view */}
-      <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {projects.map((p, i) => (
-          <div key={i} className="project-card">
-            <ProjectCard {...p} />
-          </div>
-        ))}
+        {/* Slider marquee */}
+        <Marquee pauseOnHover className="[--duration:30s] mb-24">
+          {projects.map((p, i) => (
+            <div key={i} className="inline-block px-3">
+              <ProjectCard {...p} />
+            </div>
+          ))}
+        </Marquee>
+
+        {/* Scroll reveal grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+          {projects.map((p, i) => (
+            <div
+              key={i}
+              className="scroll-card rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 shadow-[0_4px_30px_rgba(0,0,0,0.2)] hover:scale-[1.03] transition-transform duration-500"
+            >
+              <ProjectCard {...p} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

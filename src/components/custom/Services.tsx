@@ -1,7 +1,7 @@
 'use client';
 
 
-import { ServiceCard } from './ServiceCard'; // Make sure to update the import if in 
+import { ServiceCard } from './ServiceCard';
 
 const services = [
   {

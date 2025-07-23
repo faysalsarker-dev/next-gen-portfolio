@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { AuroraText } from "../magicui/aurora-text";
 import ThunderText from "./ThunderText";
-import { Globe } from "../magicui/globe";
 import { AnimatedShinyText } from "../magicui/animated-shiny-text";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -113,7 +112,6 @@ export default function Hero() {
         />
 
         <div className="-mt-20 absolute left-1/2 -translate-x-1/2 z-50 w-full">
-          <Globe />
         </div>
       </div>
     </section>
