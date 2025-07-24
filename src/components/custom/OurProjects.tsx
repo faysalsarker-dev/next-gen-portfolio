@@ -36,7 +36,7 @@ export default function OurProjects() {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    gsap.utils.toArray(".scroll-card").forEach((card, i) => {
+    gsap.utils.toArray<HTMLElement>(".scroll-card").forEach((card, i) => {
       gsap.fromTo(
         card,
         {

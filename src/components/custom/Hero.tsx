@@ -9,6 +9,99 @@ import { AnimatedShinyText } from "../magicui/animated-shiny-text";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import gsap from "gsap";
+import { World } from "./World";
+
+
+
+const globeConfig = {
+    pointSize: 3,
+  
+    // atmosphereColor: "#ffffff",
+    atmosphereColor: "#782EFA",
+    showAtmosphere: true,
+    atmosphereAltitude: 0.2,
+    // polygonColor: "rgba(255,255,255,0.7)",
+    polygonColor: "#782EFA",
+    globeColor: "#15101E",
+    // globeColor: "#782EFA",
+    emissive: "#1B1427",
+    emissiveIntensity: 0.1,
+    shininess: 0.9,
+    arcTime: 1000,
+    arcLength: 0.9,
+    rings: 1,
+    maxRings: 6,
+  };
+
+  const arcData = [
+    {
+      startLat: 40.7128,
+      startLng: -74.006,
+      endLat: 51.5074,
+      endLng: -0.1278,
+      color: "#3DF2B3", // secondary
+      arcAlt: 0.25,
+      order: 1,
+    },
+    {
+      startLat: 35.6895,
+      startLng: 139.6917,
+      endLat: -33.8688,
+      endLng: 151.2093,
+      color: "#3DF2B3", // secondary
+      arcAlt: 0.25,
+      order: 2,
+    },
+    {
+      startLat: 29.6139,
+      startLng: 77.209,
+      endLat: 37.7749,
+      endLng: -122.4194,
+      color: "#3DF2B3", // secondary
+      arcAlt: 0.25,
+      order: 3,
+    },
+    {
+      startLat: 65.6895,
+      startLng: 139.6917,
+      endLat: -33.8688,
+      endLng: 151.2093,
+      color: "#F622C2", // secondary
+      arcAlt: 0.25,
+      order: 2,
+    },
+    {
+      startLat: 88.6139,
+      startLng: 77.209,
+      endLat: 37.7749,
+      endLng: -122.4194,
+      color: "#F622C2", // secondary
+      arcAlt: 0.25,
+      order: 3,
+    },
+    {
+      startLat: 95.6895,
+      startLng: 139.6917,
+      endLat: -33.8688,
+      endLng: 151.2093,
+      color: "#F622C2", // secondary
+      arcAlt: 0.25,
+      order: 2,
+    },
+    {
+      startLat: 38.6139,
+      startLng: 77.209,
+      endLat: 37.7749,
+      endLng: -122.4194,
+      color: "#3DF2B3", // secondary
+      arcAlt: 0.25,
+      order: 3,
+    },
+  ];
+
+
+
+
 
 export default function Hero() {
   const iconRefs = useRef<(HTMLImageElement | null)[]>([]);
@@ -111,7 +204,8 @@ export default function Hero() {
           className="absolute bottom-[10%] right-[15%] blur-[2px] z-0"
         />
 
-        <div className="-mt-20 absolute left-1/2 -translate-x-1/2 z-50 w-full">
+        <div className="-mt-24 absolute left-1/2 -translate-x-1/2 z-0 w-full  h-[600px]">
+       <World globeConfig={globeConfig}  data={arcData} />
         </div>
       </div>
     </section>

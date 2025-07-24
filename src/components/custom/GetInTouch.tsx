@@ -13,8 +13,15 @@ import { FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 
 export default function GetInTouch() {
-  const containerRef = useRef(null);
-  const { register, handleSubmit, reset } = useForm();
+  const containerRef = useRef<HTMLDivElement>(null);
+  type FormData = {
+    name: string;
+    email: string;
+    phone?: string;
+    message: string;
+  };
+
+  const { register, handleSubmit, reset } = useForm<FormData>();
 
   useGSAP(() => {
     const elems = containerRef.current?.querySelectorAll(".fade-slide");
@@ -30,17 +37,19 @@ export default function GetInTouch() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 90%",
+            start: "top 85%",
+            toggleActions: "play none none reset",
           },
         }
       );
     }
   }, { scope: containerRef });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormData) => {
     console.log("Message sent:", data);
     reset();
   };
+
 
   return (
     <section

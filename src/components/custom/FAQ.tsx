@@ -37,7 +37,7 @@ export default function FAQ() {
       setActiveIndex((prev) => (prev + 1) % benefitItems.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [benefitItems.length]);
 
   useGSAP(() => {
     benefitRefs.current.forEach((el, i) => {
@@ -136,7 +136,7 @@ export default function FAQ() {
     {/* Message bubbles */}
     <div className="flex-1 overflow-y-auto space-y-4">
       <div className="bg-[--color-surface-1] px-5 py-3 w-fit rounded-xl text-white shadow-md animate-pulse border border-primary/30">
-        👋 Hey! I'm here to help — what do you want to know?
+        👋 Hey! I`&apos;`m here to help — what do you want to know?
       </div>
     </div>
 
