@@ -9,9 +9,12 @@ import { AnimatedShinyText } from "../magicui/animated-shiny-text";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import gsap from "gsap";
-import { World } from "./World";
 
+import dynamic from 'next/dynamic';
 
+const World = dynamic(() => import('./World'), {
+  ssr: false,
+});
 
 const globeConfig = {
     pointSize: 3,

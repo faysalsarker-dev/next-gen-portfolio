@@ -61,7 +61,8 @@ interface WorldProps {
   data: Position[];
 }
 
-let numbersOfRings = [0];
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const numbersOfRings = [0];
 
 export function Globe({ globeConfig, data }: WorldProps) {
   const globeRef = useRef<ThreeGlobe | null>(null);
@@ -124,6 +125,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
     const points = [];
     for (let i = 0; i < arcs.length; i++) {
       const arc = arcs[i];
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
       points.push({
         size: defaultProps.pointSize,
@@ -247,7 +249,7 @@ export function WebGLRendererConfig() {
   return null;
 }
 
-export function World(props: WorldProps) {
+export default function World(props: WorldProps) {
   const { globeConfig } = props;
   const scene = new Scene();
   scene.fog = new Fog(0xffffff, 400, 2000);
