@@ -123,8 +123,16 @@ export default function Hero() {
   }, []);
 
   return (
+    
     <section className="flex bg-background relative items-center justify-center min-h-[calc(100vh-4rem)] px-4 text-center overflow-hidden">
-      <div className="max-w-2xl space-y-6">
+         {/* <div
+        className={cn(
+          'absolute inset-0 z-0 pointer-events-none opacity-5',
+          '[background-size:40px_40px]',
+          '[background-image:linear-gradient(to_right,var(--color-primary)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-primary)_1px,transparent_1px)]'
+        )}
+      /> */}
+     <div className="max-w-2xl space-y-6">
         <div className="flex items-center justify-center">
           <div
             className={cn(

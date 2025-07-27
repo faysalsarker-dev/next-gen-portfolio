@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { navItems } from "./NavItems"
+import { navItems } from "@/lib/Items"
 
 
 

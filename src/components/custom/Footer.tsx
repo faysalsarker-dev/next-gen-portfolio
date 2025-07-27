@@ -1,10 +1,10 @@
 'use client'
 
-import { navItems } from "./NavItems";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Instagram, Linkedin, Github, Mail, Phone } from "lucide-react";
+import { navItems } from "@/lib/Items";
 
 const Footer = () => {
   return (

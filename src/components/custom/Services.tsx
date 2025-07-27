@@ -1,98 +1,70 @@
 'use client';
 
 
+import { cn } from '@/lib/utils';
 import { ServiceCard } from './ServiceCard';
+import { services } from '@/lib/Items';
+import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
 
-const services = [
-  {
-    title: 'AI & Automation',
-    price: '$ Xxx',
-    icon: '/ai.png',
-    features: [
-      'AI Chatbots & Agents',
-      'Custom Automation Tools',
-      'Data-Driven Optimization',
-      'Auto Lead Gen & CRM'
-    ]
-  },
-  {
-    title: 'Web & App Development',
-    price: '$ Xxx',
-    icon: '/atom.png',
-    features: [
-      'Modern UI/UX Design',
-      'Full-stack Development',
-      'Responsive Mobile Support',
-      'SEO + Performance Boost'
-    ]
-  },
-  {
-    title: 'Tech Growth Support',
-    price: '$ Xxx',
-    icon: '/lightbulb.png',
-    features: [
-      'Growth Strategy Planning',
-      'Conversion Optimization',
-      'Maintenance & Support',
-      'Analytics & Tracking Setup'
-    ]
-  },
-  {
-    title: 'AI & Automation',
-    price: '$ Xxx',
-    icon: '/ai.png',
-    features: [
-      'AI Chatbots & Agents',
-      'Custom Automation Tools',
-      'Data-Driven Optimization',
-      'Auto Lead Gen & CRM'
-    ]
-  },
-  {
-    title: 'Web & App Development',
-    price: '$ Xxx',
-    icon: '/atom.png',
-    features: [
-      'Modern UI/UX Design',
-      'Full-stack Development',
-      'Responsive Mobile Support',
-      'SEO + Performance Boost'
-    ]
-  },
-  {
-    title: 'Tech Growth Support',
-    price: '$ Xxx',
-    icon: '/lightbulb.png',
-    features: [
-      'Growth Strategy Planning',
-      'Conversion Optimization',
-      'Maintenance & Support',
-      'Analytics & Tracking Setup'
-    ]
-  },
-];
+import { motion } from 'framer-motion';
+
 
 export default function Services() {
+
+
+  const headingWords = 'Explore Our Services';
+  const subheadingText =
+    "Get expert-crafted solutions tailored to your goals. Backed by real experience and a commitment to quality, we help you achieve the results you deserve — with zero guesswork.";
+
   return (
-    <section className="relative z-10 px-4 py-24 bg-background text-white max-w-6xl mx-auto">
-      <div className="max-w-6xl mx-auto text-center mb-16">
+    <section
+      className="relative z-10 px-4 py-24 bg-background text-white overflow-hidden"
+
+    >
+      {/* Dot Background */}
+      <div
+        className={cn(
+          'absolute inset-0 z-0 pointer-events-none opacity-8',
+          '[background-size:40px_40px]',
+          '[background-image:linear-gradient(to_right,var(--color-accent)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-accent)_1px,transparent_1px)]'
+        )}
+      />
+
+      {/* Heading */}
+      <div className="max-w-6xl mx-auto text-center mb-16 relative z-10">
+        <motion.div
+         
+          className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4"
+        >
+          <TextGenerateEffect
+            words={headingWords}
+            
+            className="text-center text-muted-foreground font-normal"
+          />
+        </motion.div>
+        <p
         
-        <h2 className="text-4xl font-bold">What I Can Build For You</h2>
-        <p className="text-muted-foreground mt-2 max-w-xl mx-auto">
-          Future-ready digital solutions — fast, reliable, and aligned with your goals
+          className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg leading-relaxed"
+        >
+          {subheadingText}
         </p>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-3">
+      {/* Service Cards */}
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 relative z-10 max-w-6xl mx-auto">
         {services.map((service, idx) => (
-          <ServiceCard
+          <div
             key={idx}
-            idx={idx}
-            title={service.title}
-            icon={service.icon}
-            price={service.price}
-            features={service.features}
-          />
+          
+          >
+            <ServiceCard
+              idx={idx}
+              title={service.title}
+              icon={service.icon}
+              price={service.price}
+              features={service.features}
+            />
+          </div>
         ))}
       </div>
     </section>

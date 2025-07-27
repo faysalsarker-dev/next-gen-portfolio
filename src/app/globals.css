@@ -58,6 +58,7 @@
 
 
 
+
 .chat-glow::before {
   content: "";
   position: absolute;
@@ -80,9 +81,6 @@
   box-shadow: 0 0 30px var(--color-primary), 0 0 60px var(--color-accent);
   z-index: 0;
 }
-
-
-
 
 /* global.css or tailwind layer */
 .globe-glow {
@@ -262,6 +260,18 @@
   to {
     transform: translateY(calc(-100% - var(--gap)));
     }
+  }
+  --animate-shine: shine var(--duration) infinite linear;
+  @keyframes shine {
+  0% {
+    background-position: 0% 0%;
+    }
+  50% {
+    background-position: 100% 100%;
+    }
+  to {
+    background-position: 0% 0%;
+    }
   }} 
 
 .dark {
@@ -351,7 +361,6 @@
   transform: translateX(-50%) rotate(-45deg);
   z-index: -1;
 }
-
 
 .clip-top {
   clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
