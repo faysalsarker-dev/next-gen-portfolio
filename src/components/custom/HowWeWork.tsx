@@ -12,9 +12,10 @@ import {
 } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 
-const steps = [
+gsap.registerPlugin(ScrollTrigger);
+ 
+export const steps = [
   {
     title: "Vision Discovery",
     icon: Eye,
@@ -39,8 +40,7 @@ const steps = [
   {
     title: "Development Magic",
     icon: Code,
-    description:
-      "Build lightning-fast solutions with cutting-edge tech.",
+    description: "Build lightning-fast solutions with cutting-edge tech.",
     color: "from-orange-500 to-red-500",
   },
   {
@@ -65,17 +65,17 @@ export default function HowWeWork() {
   const pathsRef = useRef<(SVGPathElement | null)[]>([]);
   const [pathDs, setPathDs] = useState<string[]>([]);
 
-  // Calculate paths after layout
+  // Calculate path curves between cards
   useLayoutEffect(() => {
     if (!containerRef.current) return;
-    
+
     const calculatePaths = () => {
       const box = containerRef.current!.getBoundingClientRect();
       const ds: string[] = [];
 
       cardsRef.current.slice(0, -1).forEach((card, i) => {
         if (!card || !cardsRef.current[i + 1]) return;
-        
+
         const a = card.getBoundingClientRect();
         const b = cardsRef.current[i + 1]!.getBoundingClientRect();
         const isEven = i % 2 === 0;
@@ -87,10 +87,10 @@ export default function HowWeWork() {
 
         const cornerX = isEven
           ? startX + Math.abs(endX - startX) * 0.2
-          : startX - Math.abs(startX - endX) * 0.2;
+          : startX - Math.abs(endX - startX) * 0.2;
 
-        // Create a smoother curve
         const controlY = startY + (endY - startY) * 0.5;
+
         ds.push(
           `M${startX},${startY} C${cornerX},${startY} ${cornerX},${controlY} ${cornerX},${endY} L${endX},${endY}`
         );
@@ -99,25 +99,20 @@ export default function HowWeWork() {
       setPathDs(ds);
     };
 
-    // Initial calculation
     calculatePaths();
-
-    // Recalculate on resize
     const resizeObserver = new ResizeObserver(calculatePaths);
     resizeObserver.observe(containerRef.current);
 
     return () => resizeObserver.disconnect();
   }, []);
 
-  // Card animations
+  // Animate cards on scroll
   useLayoutEffect(() => {
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
-      
       const isEven = i % 2 === 0;
       const delay = i * 0.15;
-      
-      // Reset initial state
+
       gsap.set(card, {
         opacity: 0,
         y: 50,
@@ -125,17 +120,13 @@ export default function HowWeWork() {
         rotation: isEven ? -5 : 5,
       });
 
-      // Animation timeline
-      const tl = gsap.timeline({
+      gsap.to(card, {
         scrollTrigger: {
           trigger: card,
-          start: "top 80%",
-          end: "top 50%",
+          start: "top 70%",
+          end: "top 30%",
           scrub: 1,
-        }
-      });
-
-      tl.to(card, {
+        },
         opacity: 1,
         x: 0,
         y: 0,
@@ -143,34 +134,20 @@ export default function HowWeWork() {
         duration: 0.8,
         delay,
         ease: "back.out(1.7)",
-      }).to(
-        card,
-        {
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-          duration: 0.4,
-        },
-        delay
-      );
+      });
     });
 
-    // Copy the ref value for cleanup
-    const cardsSnapshot = [...cardsRef.current];
-
-    return () => {
-      cardsSnapshot.forEach(card => {
-        if (card) ScrollTrigger.getById(card.id)?.kill();
-      });
-    };
+    return () => ScrollTrigger.getAll().forEach(t => t.kill());
   }, []);
 
-  // Path animations
+  // Animate connecting SVG paths
   useLayoutEffect(() => {
     pathDs.forEach((_, i) => {
       const path = pathsRef.current[i];
       if (!path) return;
-      
+
       const len = path.getTotalLength();
-      
+
       gsap.set(path, {
         strokeDasharray: len,
         strokeDashoffset: len,
@@ -178,62 +155,26 @@ export default function HowWeWork() {
       });
 
       gsap.to(path, {
-        strokeDashoffset: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: "power3.out",
         scrollTrigger: {
           trigger: cardsRef.current[i + 1] || containerRef.current,
           start: "top 70%",
           end: "top 30%",
           scrub: 1,
         },
+        strokeDashoffset: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: "power3.out",
       });
     });
 
-    // Copy the ref value for cleanup
-    const pathsSnapshot = [...pathsRef.current];
-
-    return () => {
-      pathsSnapshot.forEach(path => {
-        if (path) ScrollTrigger.getById(path.id)?.kill();
-      });
-    };
+    return () => ScrollTrigger.getAll().forEach(t => t.kill());
   }, [pathDs]);
-
-  // Snap scrolling
-  useLayoutEffect(() => {
-    if (!containerRef.current) return;
-
-    const snapValue = 1 / (steps.length - 1);
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: () => `+=${containerRef.current?.scrollHeight || 0}`,
-        scrub: 0.5,
-        pin: true,
-        snap: {
-          snapTo: snapValue,
-          duration: { min: 0.3, max: 0.6 },
-          ease: "power2.inOut",
-        },
-      },
-    });
-
-    // Store the ScrollTrigger instance
-    const scrollTriggerInstance = tl.scrollTrigger;
-
-    return () => {
-      scrollTriggerInstance?.kill();
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [steps.length]);
 
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden py-32 bg-background"
+      className="relative overflow-hidden py-32 bg-background px-4"
     >
       {/* Heading */}
       <div className="text-center mb-24 px-4">
@@ -244,18 +185,17 @@ export default function HowWeWork() {
           </span>
         </div>
         <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-         
-          The Future of <br />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">
-            Digital Creation
+        How We Build{" "}
+          <span className="bg-primary rounded-lg px-1">
+            Excellence
           </span>
         </h2>
         <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
-          A revolutionary approach to digital product development that blends art with technology.
+          A step-by-step journey from idea to launch—designed to deliver stunning digital products with precision and impact.
         </p>
       </div>
 
-      {/* SVG Connectors */}
+      {/* SVG Line Connectors */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
         <defs>
           <linearGradient id="glowGradient" x1="0%" y1="0" x2="100%" y2="0">
@@ -271,7 +211,7 @@ export default function HowWeWork() {
         {pathDs.map((d, i) => (
           <path
             key={i}
-            ref={(el) => { pathsRef.current[i] = el; }}
+            ref={(el) => {pathsRef.current[i] = el}}
             d={d}
             stroke="url(#glowGradient)"
             fill="none"
@@ -293,7 +233,7 @@ export default function HowWeWork() {
           return (
             <div
               key={i}
-              ref={(el) => { cardsRef.current[i] = el; }}
+              ref={(el) => {cardsRef.current[i] = el}}
               className={`relative max-w-lg w-full md:w-[500px] p-8 rounded-3xl bg-surface-1 border border-white/10 shadow-lg backdrop-blur-xl transition-all duration-300 hover:shadow-xl hover:border-white/20 ${
                 isEven ? "self-start md:ml-10" : "self-end md:mr-10"
               }`}
@@ -306,7 +246,7 @@ export default function HowWeWork() {
                 {i + 1}
               </div>
               <div
-                className={`w-14 h-14 mb-6 rounded-xl flex items-center justify-center bg-gradient-to-r ${step.color} shadow-lg transition-transform hover:scale-110`}
+                className={`w-14 h-14 mb-6 rounded-xl flex items-center justify-center bg-gradient-to-r ${step.color} shadow-lg hover:scale-110 transition-transform`}
               >
                 <Icon className="w-6 h-6 text-white" />
               </div>

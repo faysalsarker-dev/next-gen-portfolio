@@ -6,9 +6,9 @@ import TestimonialCard from "./TestimonialCard";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import SplitText from "../magicui/SplitText";
 
-
-
+// Reviews
 const reviews = [
   { name: "Jack Dawson", username: "@jackdawson", body: "The design and experience are simply next-level!", img: "https://avatar.vercel.sh/jack" },
   { name: "Jill Wayne", username: "@jillwayne", body: "Speechless. Beautiful and professional!", img: "https://avatar.vercel.sh/jill" },
@@ -22,117 +22,94 @@ const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
 
 const Testimonial = () => {
-  const containerRef = useRef(null);
-  const titleRef = useRef(null);
+  const sectionRef = useRef(null);
   const subtitleRef = useRef(null);
-  const ctaRef = useRef(null);
+  const marqueeRef = useRef(null);
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.from(containerRef.current, {
-      opacity: 0,
-      y: 100,
-      duration: 1.2,
-      ease: "power3.out",
+    const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: containerRef.current,
+        trigger: sectionRef.current,
         start: "top 85%",
+        once: true,
       },
     });
 
-    gsap.from(titleRef.current, {
-      opacity: 0,
-      y: 40,
-      duration: 1,
-      delay: 0.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: titleRef.current,
-        start: "top 85%",
-      },
-    });
-
-    gsap.from(subtitleRef.current, {
-      opacity: 0,
-      y: 30,
-      delay: 0.4,
-      duration: 1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: subtitleRef.current,
-        start: "top 90%",
-      },
-    });
-
-    gsap.from(ctaRef.current, {
-      scale: 0.9,
-      opacity: 0,
-      duration: 1,
-      delay: 0.6,
-      ease: "back.out(1.7)",
-      scrollTrigger: {
-        trigger: ctaRef.current,
-        start: "top 90%",
-      },
-    });
+    tl.fromTo(
+      sectionRef.current,
+      { opacity: 0, y: 100 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+    )
+      .fromTo(
+        subtitleRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
+        "<+0.3"
+      )
+      .fromTo(
+        marqueeRef.current,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" },
+        "<+0.2"
+      );
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full flex flex-col items-center justify-center overflow-hidden py-24 px-4 sm:px-8 md:px-16 bg-gradient-to-b from-background/80 to-black"
+    <section
+      ref={sectionRef}
+      className="relative w-full flex flex-col items-center justify-center overflow-hidden py-24"
     >
-      {/* Animated Title */}
-      <h2
-        ref={titleRef}
+      {/* Headline with SplitText */}
+      <SplitText
+        text="Loved by clients worldwide"
         className="text-center text-white text-4xl sm:text-5xl font-bold mb-4 leading-tight drop-shadow-md"
-      >
-        What Our Clients Say
-      </h2>
+       splitType="words, chars"
+delay={80}
+duration={0.6}
+        ease="power3.out"
+       
+        from={{ opacity: 0, y: 40 }}
+        to={{ opacity: 1, y: 0 }}
+        threshold={0.1}
+        rootMargin="-100px"
+        textAlign="center"
+      />
 
       {/* Subtitle */}
       <p
         ref={subtitleRef}
-        className="text-white/60 text-center mb-4 text-sm sm:text-base max-w-xl"
+        className="text-white/60 text-center mb-6 text-sm sm:text-base max-w-xl"
       >
-        Real feedback. Real impact. <span className="text-white">Join 100+ happy clients</span> growing their brand with us.
+        See what clients are saying about our services and how we’ve transformed
+        their brands with our unique design approach.
       </p>
 
-      {/* Motivational CTA */}
+      {/* Testimonial Marquee Cards */}
       <div
-        ref={ctaRef}
-        className="text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent font-extrabold text-xl sm:text-2xl mb-12 animate-pulse"
+        ref={marqueeRef}
+        className="relative w-full mt-10"
       >
-        🚀 Want to be one of our lucky clients?<br className="sm:hidden" />
-        <span className="underline underline-offset-4 decoration-pink-400/50">Let’s build your dream together!</span>
+        {/* Gradient Fade Sides */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/12 bg-gradient-to-r from-black to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/12 bg-gradient-to-l from-black to-transparent z-10" />
+
+        <div className="px-2 overflow-hidden w-full space-y-6">
+          <Marquee className="[--duration:20s]">
+            {firstRow.map((review, idx) => (
+              <TestimonialCard key={idx} {...review} />
+            ))}
+          </Marquee>
+
+          <Marquee reverse className="[--duration:24s]">
+            {secondRow.map((review, idx) => (
+              <TestimonialCard key={idx} {...review} />
+            ))}
+          </Marquee>
+        </div>
       </div>
-
-      {/* Avatar Circles */}
-      <div className="mb-16">
-        {/* <AvatarShowcase/> */}
-        {/* <AvatarCircles numPeople={99} avatarUrls={avatars} /> */}
-      </div>
-
-      {/* Testimonial Marquees */}
-      <div className="px-2 overflow-hidden relative w-full">
-        <Marquee pauseOnHover className="[--duration:20s] mb-4">
-          {firstRow.map((review, idx) => (
-            <TestimonialCard key={idx} {...review} />
-          ))}
-        </Marquee>
-
-        <Marquee reverse pauseOnHover className="[--duration:24s]">
-          {secondRow.map((review, idx) => (
-            <TestimonialCard key={idx} {...review} />
-          ))}
-        </Marquee>
-
-        {/* Side gradient overlays */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black to-transparent z-10" />
-      </div>
-    </div>
+    </section>
   );
 };
 

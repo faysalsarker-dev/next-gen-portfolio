@@ -1,106 +1,24 @@
-// Updated Hero Section with icons positioned exactly like the reference image and animated using GSAP
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { AuroraText } from "../magicui/aurora-text";
-import ThunderText from "./ThunderText";
 import { AnimatedShinyText } from "../magicui/animated-shiny-text";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import gsap from "gsap";
 
 import dynamic from 'next/dynamic';
+import { Cover } from "../ui/cover";
+import { arcData, globeConfig } from "@/lib/Items";
+
+
 
 const World = dynamic(() => import('./World'), {
   ssr: false,
+
 });
 
-const globeConfig = {
-    pointSize: 3,
-  
-    // atmosphereColor: "#ffffff",
-    atmosphereColor: "#782EFA",
-    showAtmosphere: true,
-    atmosphereAltitude: 0.2,
-    // polygonColor: "rgba(255,255,255,0.7)",
-    polygonColor: "#782EFA",
-    globeColor: "#15101E",
-    // globeColor: "#782EFA",
-    emissive: "#1B1427",
-    emissiveIntensity: 0.1,
-    shininess: 0.9,
-    arcTime: 1000,
-    arcLength: 0.9,
-    rings: 1,
-    maxRings: 6,
-  };
-
-  const arcData = [
-    {
-      startLat: 40.7128,
-      startLng: -74.006,
-      endLat: 51.5074,
-      endLng: -0.1278,
-      color: "#3DF2B3", // secondary
-      arcAlt: 0.25,
-      order: 1,
-    },
-    {
-      startLat: 35.6895,
-      startLng: 139.6917,
-      endLat: -33.8688,
-      endLng: 151.2093,
-      color: "#3DF2B3", // secondary
-      arcAlt: 0.25,
-      order: 2,
-    },
-    {
-      startLat: 29.6139,
-      startLng: 77.209,
-      endLat: 37.7749,
-      endLng: -122.4194,
-      color: "#3DF2B3", // secondary
-      arcAlt: 0.25,
-      order: 3,
-    },
-    {
-      startLat: 65.6895,
-      startLng: 139.6917,
-      endLat: -33.8688,
-      endLng: 151.2093,
-      color: "#F622C2", // secondary
-      arcAlt: 0.25,
-      order: 2,
-    },
-    {
-      startLat: 88.6139,
-      startLng: 77.209,
-      endLat: 37.7749,
-      endLng: -122.4194,
-      color: "#F622C2", // secondary
-      arcAlt: 0.25,
-      order: 3,
-    },
-    {
-      startLat: 95.6895,
-      startLng: 139.6917,
-      endLat: -33.8688,
-      endLng: 151.2093,
-      color: "#F622C2", // secondary
-      arcAlt: 0.25,
-      order: 2,
-    },
-    {
-      startLat: 38.6139,
-      startLng: 77.209,
-      endLat: 37.7749,
-      endLng: -122.4194,
-      color: "#3DF2B3", // secondary
-      arcAlt: 0.25,
-      order: 3,
-    },
-  ];
 
 
 
@@ -125,13 +43,10 @@ export default function Hero() {
   return (
     
     <section className="flex bg-background relative items-center justify-center min-h-[calc(100vh-4rem)] px-4 text-center overflow-hidden">
-         {/* <div
-        className={cn(
-          'absolute inset-0 z-0 pointer-events-none opacity-5',
-          '[background-size:40px_40px]',
-          '[background-image:linear-gradient(to_right,var(--color-primary)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-primary)_1px,transparent_1px)]'
-        )}
-      /> */}
+
+
+
+
      <div className="max-w-2xl space-y-6">
         <div className="flex items-center justify-center">
           <div
@@ -146,22 +61,27 @@ export default function Hero() {
         </div>
 
         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-white">
-          Grow Your 
+          Level Up Your
           <AuroraText className="ml-2"> Business</AuroraText>
           <br />
           with
-          <ThunderText className="ml-2">Lightning-Fast</ThunderText>, Custom <br />
-          {"{"}
-          <Typewriter
-            words={["Websites", "Automation", "Applications", "Solutions", "Designs"]}
-            loop={false}
-            cursor
-            cursorStyle="_"
-            typeSpeed={100}
-            deleteSpeed={50}
-            delaySpeed={2000}
-          />
-          {"}"}
+        
+
+
+
+      <Cover>Lightning-Fast</Cover>, Custom {"{"}
+        <Typewriter
+          words={["Websites", "Automation", "Apps", "AI Tools", "SEO"]}
+          loop={false}
+          cursor
+          cursorStyle="_"
+          typeSpeed={100}
+          deleteSpeed={50}
+          delaySpeed={2000}
+        />
+        {"}"}
+
+
         </h1>
 
         {/* Icons positioned like reference image */}
@@ -216,9 +136,30 @@ export default function Hero() {
         />
 
         <div className="-mt-24 absolute left-1/2 -translate-x-1/2 z-0 w-full  h-[600px]">
-       <World globeConfig={globeConfig}  data={arcData} />
+       {/* <Suspense fallback={<div>Loading...</div>}>
+         <World globeConfig={globeConfig}  data={arcData} />
+       </Suspense> */}
+
+<Suspense fallback={<div className="text-center">Loading globe...</div>}>
+      
+          
+                <World globeConfig={globeConfig}  data={arcData} />
+
+            
+         
+       </Suspense>
+
+
         </div>
+
+
+
+
+ 
       </div>
+
+
+
     </section>
   );
 }
