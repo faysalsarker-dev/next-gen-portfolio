@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { HyperText } from "../magicui/hyper-text";
 
 gsap.registerPlugin(ScrollTrigger);
  
@@ -185,7 +186,9 @@ export default function HowWeWork() {
           </span>
         </div>
         <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          
         How We Build{" "}
+   
           <span className="bg-primary rounded-lg px-1">
             Excellence
           </span>

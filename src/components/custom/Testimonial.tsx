@@ -7,16 +7,9 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import SplitText from "../magicui/SplitText";
+import { reviews } from "@/lib/Items";
 
-// Reviews
-const reviews = [
-  { name: "Jack Dawson", username: "@jackdawson", body: "The design and experience are simply next-level!", img: "https://avatar.vercel.sh/jack" },
-  { name: "Jill Wayne", username: "@jillwayne", body: "Speechless. Beautiful and professional!", img: "https://avatar.vercel.sh/jill" },
-  { name: "John Smith", username: "@johnsmith", body: "Transformed my brand's identity. Elegant and powerful!", img: "https://avatar.vercel.sh/john" },
-  { name: "Jane Carter", username: "@janecarter", body: "Polished and magical. You nailed the vibe!", img: "https://avatar.vercel.sh/jane" },
-  { name: "Jenny Doe", username: "@jennydoe", body: "Best crafted service I've used!", img: "https://avatar.vercel.sh/jenny" },
-  { name: "James Bond", username: "@james007", body: "Top-tier studio quality. Insanely good!", img: "https://avatar.vercel.sh/james" },
-];
+
 
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
@@ -95,7 +88,7 @@ duration={0.6}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-1/12 bg-gradient-to-r from-black to-transparent z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-1/12 bg-gradient-to-l from-black to-transparent z-10" />
 
-        <div className="px-2 overflow-hidden w-full space-y-6">
+        <div className="px-2 overflow-hidden w-full space-y-4">
           <Marquee className="[--duration:20s]">
             {firstRow.map((review, idx) => (
               <TestimonialCard key={idx} {...review} />
@@ -103,6 +96,13 @@ duration={0.6}
           </Marquee>
 
           <Marquee reverse className="[--duration:24s]">
+            {secondRow.map((review, idx) => (
+              <TestimonialCard key={idx} {...review} />
+            ))}
+          </Marquee>
+
+
+          <Marquee  className="[--duration:24s]">
             {secondRow.map((review, idx) => (
               <TestimonialCard key={idx} {...review} />
             ))}

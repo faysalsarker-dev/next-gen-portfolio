@@ -5,7 +5,6 @@ import {
   Code,
   Rocket,
   TrendingUp,
-  CheckCircle,
 } from "lucide-react";
 
 
@@ -87,6 +86,23 @@ export const services = [
 ];
 
 
+export const techStack = [
+  { name: "React.js", icon: "/atom.png" },
+  { name: "Next.js", icon: "/lightbulb.png" },
+  { name: "Node.js", icon: "/icons/nodejs.svg" },
+  { name: "Express.js", icon: "/icons/express.svg" },
+  { name: "MongoDB", icon: "/icons/mongodb.svg" },
+  { name: "PostgreSQL", icon: "/icons/postgresql.svg" },
+  { name: "Redux", icon: "/icons/redux.svg" },
+  { name: "TypeScript", icon: "/icons/typescript.svg" },
+  { name: "Prisma", icon: "/icons/prisma.svg" },
+  { name: "Tailwind CSS", icon: "/icons/tailwind.svg" },
+  { name: "AWS", icon: "/icons/aws.svg" },
+  { name: "WordPress", icon: "/icons/wordpress.svg" },
+  { name: "Google Analytics", icon: "/icons/ga.svg" },
+];
+
+
 
 export const steps = [
   {
@@ -131,6 +147,16 @@ export const steps = [
     color: "from-pink-500 to-rose-500",
   },
 ];
+
+export const reviews = [
+  { name: "Jack Dawson", username: "@jackdawson", body: "The design and experience are simply next-level!", img: "https://avatar.vercel.sh/jack" },
+  { name: "Jill Wayne", username: "@jillwayne", body: "Speechless. Beautiful and professional!", img: "https://avatar.vercel.sh/jill" },
+  { name: "John Smith", username: "@johnsmith", body: "Transformed my brand's identity. Elegant and powerful!", img: "https://avatar.vercel.sh/john" },
+  { name: "Jane Carter", username: "@janecarter", body: "Polished and magical. You nailed the vibe!", img: "https://avatar.vercel.sh/jane" },
+  { name: "Jenny Doe", username: "@jennydoe", body: "Best crafted service I've used!", img: "https://avatar.vercel.sh/jenny" },
+  { name: "James Bond", username: "@james007", body: "Top-tier studio quality. Insanely good!", img: "https://avatar.vercel.sh/james" },
+];
+
 
 
 export const globeConfig = {
